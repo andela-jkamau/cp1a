@@ -45,3 +45,7 @@ class TestClasses(unittest.TestCase):
 		self.assertIsInstance(
 			self._staff, Staff,
 			msg="Cannot create `Staff` instance")
+
+
+if __name__ == '__main__':
+	unittest.main()
