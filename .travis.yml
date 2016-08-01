@@ -2,5 +2,5 @@ sudo: false
 language: python
 python:
   - "3.4"
-install: pip install tox-travis
+install: pip install --user -r requirements.txt
 script: tox
