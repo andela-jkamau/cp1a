@@ -24,6 +24,24 @@ class TestClasses(unittest.TestCase):
 		cls._staff = Staff()
 
 	def test_class_initialization(self):
-		self.assertIsInstance(self._amity, Amity, msg="Cannot create `Amity` instance")
-		self.assertIsInstance(self._livingspace, LivingSpace, msg="Cannot create `LivingSpace` instance")
-		self.assertIsInstance(self._office, Office, msg="Cannot create `Office` instance")
+		self.assertIsInstance(
+			self._amity, Amity,
+			msg="Cannot create `Amity` instance")
+		self.assertIsInstance(
+			self._livingspace, LivingSpace,
+			msg="Cannot create `LivingSpace` instance")
+		self.assertIsInstance(
+			self._office, Office,
+			msg="Cannot create `Office` instance")
+		self.assertIsInstance(
+			self._room, Room,
+			msg="Cannot create `Room` instance")
+		self.assertIsInstance(
+			self._fellow, Fellow,
+			msg="Cannot create `Fellow` instance")
+		self.assertIsInstance(
+			self._person, Person,
+			msg="Cannot create `Person` instance")
+		self.assertIsInstance(
+			self._staff, Staff,
+			msg="Cannot create `Staff` instance")
