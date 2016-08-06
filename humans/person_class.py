@@ -1,7 +1,7 @@
 class Person(object):
 
 	"""
-		Person class. This class accepts `identifier` and `name` as arguments.
+		This class accepts `identifier` and `name` as arguments.
 		identifier = Person's unique identifier
 		name = Person's name 
 	"""
