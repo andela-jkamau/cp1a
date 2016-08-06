@@ -1,11 +1,16 @@
+import uuid
+
+
 class Person(object):
 
 	"""
-		This class accepts `identifier` and `name` as arguments.
-		identifier = Person's unique identifier
+		This class accepts `name` as its argument.
 		name = Person's name 
 	"""
 	
-	def __init__(self, identifier, name):
-		self.identifier = identifier
+	def __init__(self, name):
 		self.name = name
+		self.identifier = generate_unique_identifier() # Person's identifier
+
+	def generate_unique_identifier(self):
+		return uuid.uuid4()
