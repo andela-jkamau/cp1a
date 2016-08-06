@@ -1,4 +1,4 @@
-from amity_class import Amity
+from .amity_class import Amity
 
 
 class Room(Amity):
