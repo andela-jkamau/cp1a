@@ -6,5 +6,5 @@ class Amity(object):
 		`rooms` = A list of rooms at Amity.
 	"""
 	
-	def __init__(self, identifier):
+	def __init__(self, rooms):
 		self.rooms = rooms
