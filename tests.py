@@ -11,7 +11,9 @@ from humans.staff_class import Staff
 
 class TestClasses(unittest.TestCase):
 	
-	"""docstring for TestClassInitialization"""
+	"""
+		Tests for program's continuous development.
+	"""
 	
 	@classmethod
 	def setUpClass(cls):
