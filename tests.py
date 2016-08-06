@@ -15,12 +15,12 @@ class TestClasses(unittest.TestCase):
 	
 	@classmethod
 	def setUpClass(cls):
-		cls._amity = Amity()
-		cls._livingspace = LivingSpace()
-		cls._office = Office()
-		cls._room = Room()
+		cls._amity = Amity([])
+		cls._livingspace = LivingSpace([])
+		cls._office = Office([])
+		cls._room = Room(4, "Oculus", "office")
 		cls._fellow = Fellow()
-		cls._person = Person()
+		cls._person = Person("12345", "John Doe")
 		cls._staff = Staff()
 
 	def test_class_initialization(self):
