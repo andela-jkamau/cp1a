@@ -10,7 +10,7 @@ class Person(object):
 	
 	def __init__(self, name):
 		self.name = name
-		self.identifier = generate_unique_identifier() # Person's identifier
+		self.identifier = self.generate_unique_identifier() # Person's identifier
 
 	def generate_unique_identifier(self):
 		return uuid.uuid4()
