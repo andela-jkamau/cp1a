@@ -11,4 +11,5 @@ class Staff(Person):
 	"""
 	
 	def __init__(self, office_allocated=False):
+		Person.__init__(self, name)
 		self.office_allocated = office_allocated
