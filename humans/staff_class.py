@@ -10,6 +10,6 @@ class Staff(Person):
 		office_allocated = The ID of the office the Fellow has been allocated to.
 	"""
 	
-	def __init__(self, office_allocated=False):
+	def __init__(self, name, office_allocated=False):
 		Person.__init__(self, name)
 		self.office_allocated = office_allocated
