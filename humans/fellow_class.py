@@ -12,7 +12,7 @@ class Fellow(Person):
 	"""
 	
 	def __init__(self, name, office_allocated=False, livingspace_allocated=False):
-		Person.__init__(self, name)
+		super().__init__(name)
 		self.office_allocated = office_allocated
 		self.livingspace_allocated = livingspace_allocated
 		
