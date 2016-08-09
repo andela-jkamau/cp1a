@@ -9,4 +9,5 @@ class LivingSpace(Room):
 	"""
 	
 	def __init__(self, people_allocated):
+		super().__init__(rooms)
 		self.people_allocated = people_allocated

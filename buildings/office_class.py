@@ -8,5 +8,6 @@ class Office(Room):
 		people_allocated = A list of the identifiers of the people allocated to a room. 
 	"""
 	
-	def __init__(self, people_allocated):
+	def __init__(self, room_capacity, room_name, room_type, people_allocated=[]):
+		super().__init__(room_capacity, room_name, room_type)
 		self.people_allocated = people_allocated

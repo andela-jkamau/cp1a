@@ -12,7 +12,7 @@ class Room(Amity):
 	"""
 	
 	def __init__(self, room_capacity, room_name, room_type):
-		Amity.__init__(self, rooms)
+		super().__init__()
 		self.room_capacity = room_capacity
 		self.room_name = room_name
 		self.room_type = room_type
