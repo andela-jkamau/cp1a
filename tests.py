@@ -17,13 +17,13 @@ class TestClasses(unittest.TestCase):
 	
 	@classmethod
 	def setUpClass(cls):
-		cls._amity = Amity([])
-		cls._livingspace = LivingSpace([])
-		cls._office = Office([])
+		cls._amity = Amity()
+		cls._livingspace = LivingSpace(room_capacity=4, room_name="Bash", room_type="living space")
+		cls._office = Office(room_capacity=4, room_name="Hogwarts", room_type="office")
 		cls._room = Room(4, "Oculus", "office")
-		cls._fellow = Fellow()
+		cls._fellow = Fellow(name="John Doe")
 		cls._person = Person("John Doe")
-		cls._staff = Staff()
+		cls._staff = Staff(name="John Doe")
 
 	def test_class_initialization(self):
 		self.assertIsInstance(
