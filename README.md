@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/andela-jkamau/cp1a.svg?branch=develop)](https://travis-ci.org/andela-jkamau/cp1a)
+[![Build Status](https://travis-ci.org/andela-jkamau/cp1a.svg?branch=develop)](https://travis-ci.org/andela-jkamau/cp1a)	[![Coverage Status](https://coveralls.io/repos/github/andela-jkamau/cp1a/badge.svg?branch=master)](https://coveralls.io/github/andela-jkamau/cp1a?branch=master)
 
 Amity has rooms which can be offices or living spaces. An office can occupy a maximum of 6 people. A living space can inhabit a maximum of 4 people.
 
