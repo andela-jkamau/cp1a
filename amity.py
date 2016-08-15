@@ -28,6 +28,7 @@ def docopt_cmd(func):
     This decorator is used to simplify the try/except block and pass the result
     of the docopt parsing to the called action.
     """
+
     def fn(self, arg):
         try:
             opt = docopt(fn.__doc__, arg)
@@ -55,7 +56,8 @@ def docopt_cmd(func):
 
 
 class AmityInteractive(cmd.Cmd):
-    intro = 'Welcome to Amity. Amity helps you allocate rooms to people at random.\n' \
+    intro = 'Welcome to Amity.' \
+        + ' Amity helps you allocate rooms to people at random.\n' \
         + ' (type help for a list of commands.)'
     prompt = '(Amity) '
     file = None
@@ -63,7 +65,9 @@ class AmityInteractive(cmd.Cmd):
     @docopt_cmd
     def do_create_room(self, arg):
         """
-        Creates rooms in Amity. Create as many rooms as possible by specifying multiple room names after the create_room command
+        Creates rooms in Amity.
+        Create as many rooms as possible by specifying multiple room names
+        after the create_room command
 
         Usage:
             create_room <room_name>...
@@ -75,7 +79,9 @@ class AmityInteractive(cmd.Cmd):
     def do_add_person(self, arg):
         """
         Adds a person to the system and allocates the person to a random room.
-        Wants_accommodation here is an optional argument which can be either Y or N. The default value if it is not provided is N
+        Wants_accommodation here is an optional argument
+        which can be either Y or N.
+        The default value if it is not provided is N
 
         Usage:
             add_person <person_name> <FELLOW|STAFF> [wants_accommodation]
@@ -118,7 +124,8 @@ class AmityInteractive(cmd.Cmd):
     def do_print_allocations(self, arg):
         """
         Prints a list of allocations onto the screen.
-        Specifying the optional -o option here outputs the registered allocations to a txt file
+        Specifying the optional -o option here outputs
+        the registered allocations to a txt file
 
         Usage:
             print_allocations [-o=filename]
@@ -129,7 +136,9 @@ class AmityInteractive(cmd.Cmd):
     @docopt_cmd
     def do_print_unallocated(self, arg):
         """
-        Prints a list of unallocated people to the screen. Specifying the -o option here outputs the information to the txt file provided
+        Prints a list of unallocated people to the screen.
+        Specifying the -o option here outputs
+        the information to the txt file provided
 
         Usage:
             print_unallocated [-o=filename]
@@ -141,7 +150,7 @@ class AmityInteractive(cmd.Cmd):
     def do_print_room(self, arg):
         """
         Prints  the names of all the people in room_name on the screen
-        
+
         Usage:
             print_room <room_name>
         """
@@ -152,7 +161,8 @@ class AmityInteractive(cmd.Cmd):
     def do_save_state(self, arg):
         """
         Persists all the data stored in the app to a SQLite database.
-        Specifying the --db parameter explicitly stores the data in the sqlite_database specified
+        Specifying the --db parameter explicitly stores the data in
+        the sqlite_database specified
 
         Usage:
             save_state [--db=sqlite_database]
@@ -184,5 +194,3 @@ opt = docopt(__doc__, sys.argv[1:])
 
 if opt['--interactive']:
     AmityInteractive().cmdloop()
-
-print(opt)
