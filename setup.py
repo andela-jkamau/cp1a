@@ -4,5 +4,6 @@ setup(
     description = 'Checkpoint 1A',
     author = 'Jimmy Kamau',
     author_email = 'jimmy.kamau@andela.com',
-    url = 'https://github.com/andela-jkamau/cp1a'
+    url = 'https://github.com/andela-jkamau/cp1a',
+    version = '1.0.0'
 )

@@ -6,7 +6,8 @@ install:
   pip install -r requirements.txt
   pip install coveralls
 script:
-  coverage run --source=cp1a tests.py
+  tox
+  coverage run tests.py
 after_success:
   coveralls
 notifications:
