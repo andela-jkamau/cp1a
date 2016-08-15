@@ -1,4 +1,5 @@
 import unittest
+from subprocess import getoutput
 
 from buildings.amity_class import Amity
 from buildings.livingspace_class import LivingSpace
@@ -49,7 +50,8 @@ class TestClasses(unittest.TestCase):
 			msg="Cannot create `Staff` instance")
 
 	def test_commands_callability(self):
-		pass
+		self.assertEqual(getoutput(["./amity.py -h"]), 'Welcome to Amity. Amity helps you allocate rooms to people at random.\nUsage:\n    amity create_room <room_name>...\n    amity add_person <person_name> <FELLOW|STAFF> [wants_accommodation]\n    amity reallocate_person <person_identifier> <new_room_name>\n    amity load_people [-f=filename]\n    amity print_allocations [-o=filename]\n    amity print_unallocated [-o=filename]\n    amity print_room <room_name>\n    amity save_state [--db=sqlite_database]\n    amity load_state <sqlite_database>\n    amity (-i | --interactive)\n    amity (-h | --help)\nOptions:\n    -i, --interactive  Interactive Mode\n    -h, --help  Show this screen and exit.')
+
 
 
 if __name__ == '__main__':
