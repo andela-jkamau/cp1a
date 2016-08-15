@@ -2,7 +2,12 @@ sudo: false
 language: python
 python:
   - "3.4"
-install: pip install -r requirements.txt
-script: tox
+install:
+  pip install -r requirements.txt
+  pip install coveralls
+script:
+  coverage run --source=cp1a tests.py
+after_success:
+  coveralls
 notifications:
   email: false

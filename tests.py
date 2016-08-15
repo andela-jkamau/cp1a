@@ -48,6 +48,9 @@ class TestClasses(unittest.TestCase):
 			self._staff, Staff,
 			msg="Cannot create `Staff` instance")
 
+	def test_commands_callability(self):
+		pass
+
 
 if __name__ == '__main__':
 	unittest.main()
