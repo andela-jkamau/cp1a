@@ -12,7 +12,7 @@ def create_room(args):
 	"""
 
 	if not args["OFFICE"] and not args["LIVINGSPACE"]:
-		print("Please specify if the room is an office or living space")
+		message = "Please specify if the room is an office or living space"
 
 	elif args["OFFICE"]:
 		rooms = [{"room_capacity": 6, "room_name": r, "room_type": "office"} for r in args["<room_name>"]]
@@ -24,9 +24,19 @@ def create_room(args):
 
 	try:
 		current_rooms.rooms.update(created_rooms)
-		print("The rooms" \
-		+ str(args["<room_name>"]) \
-		+ "have been created successfully")
+		message = "The rooms"
+		for room in args["<room_name>"]:
+			message += " " + str(room)
+		message += " have been created successfully"
 
 	except:
-		print("Error encountered while creating rooms")
+		message = "Error encountered while creating rooms"
+
+	return(message)
+
+def list_rooms():
+	"""
+	List the rooms in Amity. Returns a dictionary of the rooms
+	"""
+
+	return current_rooms.rooms

@@ -76,7 +76,7 @@ class AmityInteractive(cmd.Cmd):
             create_room (OFFICE|LIVINGSPACE) <room_name>...
         """
 
-        room_functions.create_room(arg)
+        print(room_functions.create_room(arg))
 
     @docopt_cmd
     def do_add_person(self, arg):
