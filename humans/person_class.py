@@ -1,6 +1,3 @@
-import uuid
-
-
 class Person(object):
 
     """
@@ -8,10 +5,6 @@ class Person(object):
      name=Person's name 
     """
 
-    def __init__(self, name):
+    def __init__(self, name, identifier=0):
         self.name = name
-        self.identifier = uuid.uuid4()  # Person's identifier
-
-    # Generate a unique identifier for a person. Returns a python UUID4 object.
-    def generate_unique_identifier(self):
-        self.identifier = uuid.uuid4()
+        self.identifier = identifier  # The person's identifier

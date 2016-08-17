@@ -8,6 +8,8 @@ from buildings.room_class import Room
 from humans.fellow_class import Fellow
 from humans.person_class import Person
 from humans.staff_class import Staff
+import buildings.room_functions as room_functions
+import humans.person_functions as person_functions
 
 
 class TestClasses(unittest.TestCase):

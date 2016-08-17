@@ -3,7 +3,7 @@
 Welcome to Amity. Amity helps you allocate rooms to people at random.
 Usage:
     amity create_room (OFFICE|LIVINGSPACE) <room_name>...
-    amity add_person <person_first_name> <person_other_name> <FELLOW|STAFF> [wants_accommodation]
+    amity add_person <person_first_name> <person_other_name> (FELLOW|STAFF) [--wants_accommodation=(Y|N)]
     amity reallocate_person <person_identifier> <new_room_name>
     amity load_people [-f=filename]
     amity print_allocations [-o=filename]
@@ -15,7 +15,8 @@ Usage:
     amity (-h | --help)
 Options:
     -i, --interactive  Interactive Mode
-    -h, --help  Show this screen and exit.
+    -h, --help  Show this screen and exit
+    --wants_accomodation  Whether the fellow wants accommodation [default: N]
 """
 
 import sys
@@ -23,6 +24,7 @@ import cmd
 from docopt import docopt, DocoptExit
 
 import buildings.room_functions as room_functions
+import humans.person_functions as person_functions
 
 
 def docopt_cmd(func):
@@ -87,10 +89,10 @@ class AmityInteractive(cmd.Cmd):
         The default value if it is not provided is N
 
         Usage:
-            amity add_person <person_first_name> <person_other_name> <FELLOW|STAFF> [wants_accommodation]
+            add_person <person_first_name> <person_other_name> (FELLOW|STAFF) [--wants_accommodation=(Y|N)]
         """
 
-        print(arg)
+        print(person_functions.create_person(arg))
 
     @docopt_cmd
     def do_reallocate_person(self, arg):
