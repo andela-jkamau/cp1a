@@ -43,4 +43,4 @@ def allocate_office(identifier):
 
 
 def allocate_livingspace(identifier):
-	return False
+	return False 

@@ -2,10 +2,11 @@
 """
 Welcome to Amity. Amity helps you allocate rooms to people at random.
 Usage:
-    amity create_room (OFFICE|LIVINGSPACE) <room_name>...
+    amity create_room <room_name>...
     amity add_person <person_first_name> <person_other_name> (FELLOW|STAFF) [--wants_accommodation=(Y|N)]
     amity reallocate_person <person_identifier> <new_room_name>
     amity load_people [-f=filename]
+    amity print_all_rooms
     amity print_allocations [-o=filename]
     amity print_unallocated [-o=filename]
     amity print_room <room_name>
@@ -70,12 +71,11 @@ class AmityInteractive(cmd.Cmd):
     def do_create_room(self, arg):
         """
         Creates rooms in Amity.
-        OFFICE/LIVINGSPACE specifies what type of room it is.
         Create as many rooms as possible by specifying multiple room names
-        after the OFFICE/LIVINGSPACE command
+        after the create_room command
 
         Usage:
-            create_room (OFFICE|LIVINGSPACE) <room_name>...
+            create_room <room_name>...
         """
 
         print(room_functions.create_room(arg))
@@ -124,6 +124,17 @@ class AmityInteractive(cmd.Cmd):
         """
 
         print(arg)
+
+    @docopt_cmd
+    def do_print_all_rooms(self, arg):
+        """
+        Prints information about all rooms in Amity
+
+        Usage:
+            print_all_rooms
+        """
+
+        print(room_functions.list_rooms())
 
     @docopt_cmd
     def do_print_allocations(self, arg):
