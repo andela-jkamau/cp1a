@@ -171,7 +171,7 @@ class AmityInteractive(cmd.Cmd):
             print_room <room_name>
         """
 
-        print(arg)
+        print(room_functions.room_occupants(arg))
 
     @docopt_cmd
     def do_save_state(self, arg):
