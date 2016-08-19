@@ -53,10 +53,15 @@ def create_person(args):
 
 def allocate_office(identifier):
     office = str(random.choice(room_functions.current_rooms.available_offices))
+    import ipdb
+    ipdb.set_trace()
     allocated_office = room_functions.current_rooms.rooms[office]
     allocated_office.add_person_to_room(identifier)
     return allocated_office.room_name
 
 
 def allocate_livingspace(identifier):
-    return False
+    living = str(random.choice(room_functions.current_rooms.available_livingspaces))
+    allocated_living = room_functions.current_rooms.rooms[living]
+    allocated_living.add_person_to_room(identifier)
+    return allocated_living.room_name
