@@ -1,10 +1,10 @@
 from .amity_class import Amity
-from .room_class import Room
+current_rooms = Amity()
+
+
 from .office_class import Office
 from .livingspace_class import LivingSpace
 
-
-current_rooms = Amity()
 
 def create_room(args):
 	"""
@@ -18,14 +18,14 @@ def create_room(args):
 		room_type = room_option.upper()
 
 	if room_type == "L":
-		rooms = [{"room_capacity": 4, "room_name": r, "room_type": "Living space"} for r in args["<room_name>"]]
+		rooms = [{"room_capacity": 4, "room_name": r, "room_type": "Living space", "people_allocated": []} for r in args["<room_name>"]]
 		created_rooms = {r["room_name"]: LivingSpace(**r) for r in rooms}
 
 		for r in args["<room_name>"]:
 			current_rooms.available_livingspaces.append(r)
 
 	elif room_type == "O":
-		rooms = [{"room_capacity": 6, "room_name": r, "room_type": "Office"} for r in args["<room_name>"]]
+		rooms = [{"room_capacity": 6, "room_name": r, "room_type": "Office", "people_allocated": []} for r in args["<room_name>"]]
 		created_rooms = {r["room_name"]: Office(**r) for r in rooms}
 		for r in args["<room_name>"]:
 			current_rooms.available_offices.append(r)
@@ -52,8 +52,11 @@ def list_rooms():
 	"""
 
 	message = ""
-	for room in current_rooms.rooms:
-		message += "\nROOM NAME: {}\nROOM TYPE: {}\nROOM CAPACITY: {}\nNUMBER OF OCCUPANTS: {}\nNUMBER OF EMPTY SLOTS: {}\n".format(current_rooms.rooms[room].room_name, current_rooms.rooms[room].room_type, current_rooms.rooms[room].room_capacity, len(current_rooms.rooms[room].people_allocated), int(current_rooms.rooms[room].room_capacity) - int(len(current_rooms.rooms[room].people_allocated)))
+	try:
+		for room in current_rooms.rooms:
+			message += "\nROOM NAME: {}\nROOM TYPE: {}\nROOM CAPACITY: {}\nNUMBER OF OCCUPANTS: {}\nNUMBER OF EMPTY SLOTS: {}\n".format(current_rooms.rooms[room].room_name, current_rooms.rooms[room].room_type, current_rooms.rooms[room].room_capacity, len(current_rooms.rooms[room].people_allocated), int(current_rooms.rooms[room].room_capacity) - int(len(current_rooms.rooms[room].people_allocated)))
+	except:
+		message = "Error while retrieving room information"
 		
 	return message
 
@@ -62,7 +65,10 @@ def room_occupants(args):
 	Return the occupants of a room
 	"""
 
-	message = "OCCUPANTS OF {}:".format(args["<room_name>"])
-	for person_id in current_rooms.rooms[args["<room_name>"]].people_allocated:
-		message += "\n{}".format(person_id)
-	return message
+	try:
+		message = "OCCUPANTS OF {}:".format(args["<room_name>"])
+		for person_id in current_rooms.rooms[args["<room_name>"]].people_allocated:
+			message += "\n{}".format(person_id)
+		return message
+	except:
+		return "Error while retrieving room information"

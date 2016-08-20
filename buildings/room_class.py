@@ -1,7 +1,4 @@
-from .amity_class import Amity
-
-
-class Room(Amity):
+class Room():
 
 	"""
 		This class extends the Amity class.
@@ -11,8 +8,7 @@ class Room(Amity):
 		room_type = The type of the room: office or living space
 	"""
 	
-	def __init__(self, room_capacity, room_name, room_type, **kwargs):
-		super().__init__(**kwargs)
+	def __init__(self, room_capacity, room_name, room_type):
 		self.room_capacity = room_capacity
 		self.room_name = room_name
 		self.room_type = room_type

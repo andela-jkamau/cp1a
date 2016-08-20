@@ -3,7 +3,7 @@
 Welcome to Amity. Amity helps you allocate rooms to people at random.
 Usage:
     amity create_room <room_name>...
-    amity add_person <person_first_name> <person_other_name> (FELLOW|STAFF) [--wants_accommodation=(Y|N)]
+    amity add_person <person_first_name> <person_other_name> <person_type> [<wants_accommodation>]
     amity reallocate_person <person_identifier> <new_room_name>
     amity load_people [-f=filename]
     amity print_all_rooms
@@ -17,7 +17,6 @@ Usage:
 Options:
     -i, --interactive  Interactive Mode
     -h, --help  Show this screen and exit
-    --wants_accomodation  Whether the fellow wants accommodation [default: N]
 """
 
 import sys
@@ -89,7 +88,7 @@ class AmityInteractive(cmd.Cmd):
         The default value if it is not provided is N
 
         Usage:
-            add_person <person_first_name> <person_other_name> (FELLOW|STAFF) [--wants_accommodation=(Y|N)]
+            add_person <person_first_name> <person_other_name> <person_type> [<wants_accommodation>]
         """
 
         print(person_functions.create_person(arg))
