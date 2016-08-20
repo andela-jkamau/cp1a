@@ -4,6 +4,7 @@ current_rooms = Amity()
 
 from .office_class import Office
 from .livingspace_class import LivingSpace
+import humans as humans_functions
 
 
 def create_room(args):
@@ -68,7 +69,7 @@ def room_occupants(args):
 	try:
 		message = "OCCUPANTS OF {}:".format(args["<room_name>"])
 		for person_id in current_rooms.rooms[args["<room_name>"]].people_allocated:
-			message += "\n{}".format(person_id)
+			message += "\n{}".format(humans_functions.person_functions.people[person_id].name)
 		return message
 	except:
 		return "Error while retrieving room information"
