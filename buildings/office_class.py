@@ -12,8 +12,14 @@ class Office(Room):
 		super().__init__(**kwargs)
 		self.people_allocated = people_allocated
 
-	def add_person_to_room(self, person_name):
+	def add_person_to_room(self, person_id):
 		if len(self.people_allocated) < self.room_capacity:
-			self.people_allocated.append(person_name)
+			self.people_allocated.append(person_id)
 		if len(self.people_allocated) == self.room_capacity:
 			current_rooms.available_offices.remove(self.room_name)
+
+	def remove_person_from_room(self, person_id):
+		try:
+			self.people_allocated.remove(person_id)
+		except:
+			return False

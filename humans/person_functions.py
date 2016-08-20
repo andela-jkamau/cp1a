@@ -79,14 +79,33 @@ def reallocate_person(args):
     Reallocate a person from one room to another 
     """
 
-    person_id = int(args["person_identifier"])
+    person_id = int(args["<person_identifier>"])
     if person_id in list(people.keys()):
         person = people[person_id]
-        new_room = args["new_room_name"]
+        new_room = args["<new_room_name>"]
         rooms_at_amity = room_functions.current_rooms
         if new_room not in rooms_at_amity.available_livingspaces and new_room not in rooms_at_amity.available_offices:
             return "The new room either doesn't exist or is full"
         else:
-            pass
+            if new_room in rooms_at_amity.available_offices: 
+                current_person_room = people[person_id].office_allocated
+                people[person_id].office_allocated = new_room
+            elif new_room in rooms_at_amity.available_livingspaces:
+                current_person_room = people[person_id].office_allocated
+                people[person_id].livingspace_allocated = new_room
+            rooms_at_amity.rooms[current_person_room].remove_person_from_room(person_id)
+            rooms_at_amity.rooms[new_room].add_person_to_room(person_id)
+            return "{} has been moved to {}".format(people[person_id].name, new_room)
     else:
         return "There is no person with the given identifier"
+
+
+def get_person_name(person_id):
+    """
+    Return person's name given their ID
+    """
+
+    try:
+        return people[person_id].name
+    except:
+        return False

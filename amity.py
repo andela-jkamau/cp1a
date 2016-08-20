@@ -102,7 +102,7 @@ class AmityInteractive(cmd.Cmd):
             reallocate_person <person_identifier> <new_room_name>
         """
 
-        print(arg)
+        print(person_functions.reallocate_person(arg))
 
     @docopt_cmd
     def do_load_people(self, arg):
