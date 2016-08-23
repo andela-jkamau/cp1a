@@ -146,7 +146,7 @@ class AmityInteractive(cmd.Cmd):
             print_allocations [-o=filename]
         """
 
-        print(arg)
+        print(room_functions.print_allocations(arg))
 
     @docopt_cmd
     def do_print_unallocated(self, arg):

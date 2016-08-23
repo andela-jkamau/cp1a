@@ -73,3 +73,17 @@ def room_occupants(args):
 		return message
 	except:
 		return "Error while retrieving room information"
+
+def print_allocations(args):
+	"""
+	Return a list of allocations
+	"""
+
+	message = ""
+	for room in current_rooms.rooms:
+		message += "{}\n".format(current_rooms.rooms[room].room_name)
+		message += "----------------------------------------\n"
+		for person_id in current_rooms.rooms[room].people_allocated:
+			message += "{}, ".format(humans_functions.person_functions.people[person_id].name)
+		message += "\n\n"
+	return message
