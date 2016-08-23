@@ -16,7 +16,7 @@ def create_person(args):
     """
     Create person based on user's input
     """
-
+    
     full_name = args["<person_first_name>"] + " " + args["<person_other_name>"]
     identifier = len(people) + 1
     person_details = [{
