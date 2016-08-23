@@ -109,3 +109,14 @@ def get_person_name(person_id):
         return people[person_id].name
     except:
         return False
+
+
+def load_people(args):
+    """
+    Adds people to rooms from a txt file
+    """
+
+    #import ipdb
+    #ipdb.set_trace()
+    filename = args["<filename>"]
+    #with open(filename, 'r')

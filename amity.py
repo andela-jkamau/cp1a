@@ -5,7 +5,7 @@ Usage:
     amity create_room <room_name>...
     amity add_person <person_first_name> <person_other_name> <person_type> [<wants_accommodation>]
     amity reallocate_person <person_identifier> <new_room_name>
-    amity load_people [-f=filename]
+    amity load_people <filename>
     amity print_all_rooms
     amity print_allocations [-o=filename]
     amity print_unallocated [-o=filename]
@@ -110,7 +110,7 @@ class AmityInteractive(cmd.Cmd):
         Adds people to rooms from a txt file.
 
         Usage:
-            load_people [-f=filename]
+            load_people <filename>
 
         Sample input format:
             OLUWAFEMI SULE FELLOW Y
@@ -122,7 +122,7 @@ class AmityInteractive(cmd.Cmd):
             KELLY McGUIRE STAFF N
         """
 
-        print(arg)
+        print(person_functions.load_people(arg))
 
     @docopt_cmd
     def do_print_all_rooms(self, arg):
