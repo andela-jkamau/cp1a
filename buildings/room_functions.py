@@ -85,5 +85,5 @@ def print_allocations(args):
 		message += "----------------------------------------\n"
 		for person_id in current_rooms.rooms[room].people_allocated:
 			message += "{}, ".format(humans_functions.person_functions.people[person_id].name)
-		message += "\n\n"
+		message += "\n\n\n"
 	return message
