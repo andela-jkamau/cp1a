@@ -6,6 +6,8 @@ from .fellow_class import Fellow
 from .staff_class import Staff
 import buildings.room_functions as room_functions
 
+import ipdb
+
 
 people = {}
 
@@ -14,6 +16,7 @@ def create_person(args):
     """
     Create person based on user's input
     """
+
     full_name = args["<person_first_name>"] + " " + args["<person_other_name>"]
     identifier = len(people) + 1
     person_details = [{
@@ -116,7 +119,16 @@ def load_people(args):
     Adds people to rooms from a txt file
     """
 
-    #import ipdb
-    #ipdb.set_trace()
     filename = args["<filename>"]
-    #with open(filename, 'r')
+    try:
+        with open(filename, 'r') as f:
+            file_read = f.readlines()
+        for person in file_read:
+            person = person.split()
+            my_args = {'<person_first_name>': person[0], '<person_other_name>': person[1], '<person_type>': person[2], '<wants_accommodation>': person[3] if len(person)>3 else None}
+            print (create_person(my_args))
+        message = "Finished adding people"
+    except:
+        message = "Error while adding people to system"
+    
+    return message
