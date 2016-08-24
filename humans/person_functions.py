@@ -132,3 +132,16 @@ def load_people(args):
         message = "Error while adding people to system"
     
     return message
+
+
+def print_unallocated(args):
+    """
+    Returns unallocated people
+    """
+    message = ""
+    #ipdb.set_trace()
+    for person in people:
+        if people[person].office_allocated is None:
+            message += "{}\n".format(people[person].name)
+
+    return message

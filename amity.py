@@ -160,7 +160,7 @@ class AmityInteractive(cmd.Cmd):
             print_unallocated [-o=filename]
         """
 
-        print(arg)
+        print(person_functions.print_unallocated(arg))
 
     @docopt_cmd
     def do_print_room(self, arg):
