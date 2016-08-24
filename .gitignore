@@ -90,3 +90,4 @@ ENV/
 
 # My own
 mytests.py
+test_*.txt
