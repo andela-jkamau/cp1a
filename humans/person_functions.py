@@ -139,9 +139,32 @@ def print_unallocated(args):
     Returns unallocated people
     """
     message = ""
-    #ipdb.set_trace()
+    
     for person in people:
         if people[person].office_allocated is None:
-            message += "{}\n".format(people[person].name)
+            message += "{} hasn't been allocated to an office".format(people[person].name)
+            try:
+                message += " or a living space".format(people[person].name) if people[person].livingspace_allocated is None else ""
+            except AttributeError:
+                message += ""
+            message += "\n"
+
+        else:
+            try:
+                message += "{} hasn't been allocated to a living space".format(people[person].name) if people[person].livingspace_allocated is None else ""
+                message += "\n"
+            except AttributeError:
+                message += ""
+
+    if args['-o'] and ['<file_location>'] is not None:
+        filename = args['<file_location>']
+        try:
+            with open(filename, 'wt') as f:
+                f.write(message)
+            message = "Unallocations have been printed to {}".format(filename)
+        except:
+            message = str(sys.exc_info()[0])
+    elif (args['<file_location>'] is not None and args['-o'] is False) or (args['-o'] is not False and args['<file_location>'] is None):
+        message = "Specify the file to output to after the `-o` argument"
 
     return message

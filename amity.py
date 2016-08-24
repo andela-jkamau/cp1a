@@ -157,7 +157,7 @@ class AmityInteractive(cmd.Cmd):
         the information to the txt file provided
 
         Usage:
-            print_unallocated [-o=filename]
+            print_unallocated [-o <file_location>]
         """
 
         print(person_functions.print_unallocated(arg))
