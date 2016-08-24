@@ -1,3 +1,5 @@
+import sys
+
 from .amity_class import Amity
 current_rooms = Amity()
 
@@ -5,6 +7,8 @@ current_rooms = Amity()
 from .office_class import Office
 from .livingspace_class import LivingSpace
 import humans as humans_functions
+
+import ipdb
 
 
 def create_room(args):
@@ -86,4 +90,16 @@ def print_allocations(args):
 		for person_id in current_rooms.rooms[room].people_allocated:
 			message += "{}, ".format(humans_functions.person_functions.people[person_id].name)
 		message += "\n\n\n"
+
+	if args['-o'] and ['<file_location>'] is not None:
+		filename = args['<file_location>']
+		try:
+			with open(filename, 'wt') as f:
+				f.write(message)
+			message = "Allocations have been printed to {}".format(filename)
+		except:
+			message = str(sys.exc_info()[0])
+	elif (args['<file_location>'] is not None and args['-o'] is False) or (args['-o'] is not False and args['<file_location>'] is None):
+		message = "Specify the file to output to after the `-o` argument"
+
 	return message

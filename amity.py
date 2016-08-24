@@ -7,8 +7,8 @@ Usage:
     amity reallocate_person <person_identifier> <new_room_name>
     amity load_people <filename>
     amity print_all_rooms
-    amity print_allocations [-o=filename]
-    amity print_unallocated [-o=filename]
+    amity print_allocations [-o <file_location>]
+    amity print_unallocated [-o <file_location>]
     amity print_room <room_name>
     amity save_state [--db=sqlite_database]
     amity load_state <sqlite_database>
@@ -17,6 +17,7 @@ Usage:
 Options:
     -i, --interactive  Interactive Mode
     -h, --help  Show this screen and exit
+    -o Output into a specified file
 """
 
 import sys
@@ -143,7 +144,7 @@ class AmityInteractive(cmd.Cmd):
         the registered allocations to a txt file
 
         Usage:
-            print_allocations [-o=filename]
+            print_allocations [-o <file_location>]
         """
 
         print(room_functions.print_allocations(arg))
