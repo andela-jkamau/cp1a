@@ -6,18 +6,32 @@ from .fellow_class import Fellow
 from .staff_class import Staff
 import buildings.room_functions as room_functions
 
+
+DATABASE = 'amitydb.db'
+
+
+import amity_db.models as models
+
 import ipdb
 
 
 people = {}
 
 
+def populate_people_from_db():
+    persons = models.PersonDetails.select()
+
+
 def create_person(args):
     """
     Create person based on user's input
     """
-    
+
     full_name = args["<person_first_name>"] + " " + args["<person_other_name>"]
+    for person in people:
+        if people[person].name == full_name: 
+            return "{} already exists".format(people[person].name)
+
     identifier = len(people) + 1
     person_details = [{
         "name": full_name,

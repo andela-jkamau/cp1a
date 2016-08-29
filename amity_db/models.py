@@ -1,7 +1,7 @@
 from peewee import *
 
 
-db = SqliteDatabase(DATABASE)
+db = SqliteDatabase('amitydb.db')
 
 
 class BaseModel(Model):
@@ -16,7 +16,7 @@ class AmityRoom(BaseModel):
 
 
 class PersonDetails(BaseModel):
-    person_id = ForeignKeyField(Person, related_name='person_id')
+    person_id = IntegerField()
     name = TextField()
     person_type = TextField()
     office = TextField()

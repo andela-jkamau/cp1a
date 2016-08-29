@@ -1,4 +1,4 @@
-class Room():
+class Room(object):
 
 	"""
 		This class extends the Amity class.
