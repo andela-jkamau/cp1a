@@ -67,7 +67,7 @@ class AmityInteractive(cmd.Cmd):
         + ' (type help for a list of commands.)'
     prompt = '(Amity) '
     file = None
-    #person_functions.populate_people_from_db()
+    person_functions.populate_people_from_db()
 
     @docopt_cmd
     def do_create_room(self, arg):

@@ -5,14 +5,14 @@ from .person_class import Person
 from .fellow_class import Fellow
 from .staff_class import Staff
 import buildings.room_functions as room_functions
-
+from amity_db.models_functions import populate_people
 
 people = {}
 
 
-"""def populate_people_from_db():
-    persons = models.PersonDetails.select()
-"""
+def populate_people_from_db():
+    return (populate_people())
+
 
 def create_person(args):
     """
