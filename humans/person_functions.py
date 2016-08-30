@@ -5,13 +5,26 @@ from .person_class import Person
 from .fellow_class import Fellow
 from .staff_class import Staff
 import buildings.room_functions as room_functions
-from amity_db.models_functions import populate_people
-
+from amity_db.models_functions import populate_people, add_people
+import ipdb
 people = {}
 
 
 def populate_people_from_db():
-    return (populate_people())
+    people_from_db = populate_people()
+    for person in people_from_db:
+        #ipdb.set_trace()
+        person_details = [{
+            "name": person.name,
+            "identifier": person.person_id,
+            "office_allocated": person.office
+        }]
+        if person.person_type == "Fellow":
+            person_details[0]["livingspace_allocated"] = person.living_space if person.living_space
+            created_person = {person_details[0][
+            "identifier"]: Fellow(**r) for r in person_details}
+        people.update(created_person)
+    return " [*] People successfully loaded from database...\n"
 
 
 def create_person(args):
@@ -174,3 +187,6 @@ def print_unallocated(args):
         message = "Specify the file to output to after the `-o` argument"
 
     return message
+
+def add_people_to_db():
+    return add_people(people)

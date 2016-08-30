@@ -12,4 +12,28 @@ def populate_people():
     """
 
     people = s.query(PersonDetails).all()
-    return people 
+    return people
+
+
+def add_people(people_dict):
+    """
+    Takes a dictionary of people details and adds them to the database
+    """
+
+    try:
+        for person in people_dict:
+            person_db = PersonDetails(person_id=people_dict[person].identifier, name=people_dict[person].name, office=people_dict[person].office_allocated)
+            try:
+                person_db.living_space = people_dict[person].livingspace_allocated
+                person_db.person_type = "Fellow"
+            except AttributeError:
+                person_db.person_type = "Staff"
+
+            s.add(person_db)
+
+        s.commit()
+        s.close()
+        return "People added to database successfully"
+    except:
+        return "Error in adding people to db"
+
