@@ -7,20 +7,12 @@ from .staff_class import Staff
 import buildings.room_functions as room_functions
 
 
-DATABASE = 'amitydb.db'
-
-
-import amity_db.models as models
-
-import ipdb
-
-
 people = {}
 
 
-def populate_people_from_db():
+"""def populate_people_from_db():
     persons = models.PersonDetails.select()
-
+"""
 
 def create_person(args):
     """

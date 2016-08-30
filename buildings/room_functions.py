@@ -8,8 +8,6 @@ from .office_class import Office
 from .livingspace_class import LivingSpace
 import humans as humans_functions
 
-import ipdb
-
 
 def create_room(args):
 	"""
