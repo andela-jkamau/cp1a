@@ -1,5 +1,5 @@
 from .room_class import Room
-
+from .room_functions import current_rooms
 
 class LivingSpace(Room):
 
@@ -17,3 +17,9 @@ class LivingSpace(Room):
 			self.people_allocated.append(person_name)
 		if len(self.people_allocated) == self.room_capacity:
 			current_rooms.available_livingspaces.remove(self.room_name)
+
+	def remove_person_from_room(self, person_id):
+		try:
+			self.people_allocated.remove(person_id)
+		except:
+			return False

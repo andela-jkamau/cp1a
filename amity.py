@@ -186,6 +186,7 @@ class AmityInteractive(cmd.Cmd):
         """
 
         print(person_functions.add_people_to_db())
+        print(room_functions.add_rooms_to_db())
 
     @docopt_cmd
     def do_load_state(self, arg):
@@ -207,6 +208,7 @@ class AmityInteractive(cmd.Cmd):
         exit()
 
 print(person_functions.populate_people_from_db())
+print(room_functions.populate_rooms_from_db())
 
 opt = docopt(__doc__, sys.argv[1:])
 

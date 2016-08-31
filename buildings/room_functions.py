@@ -7,6 +7,36 @@ current_rooms = Amity()
 from .office_class import Office
 from .livingspace_class import LivingSpace
 import humans as humans_functions
+from amity_db.models_functions import add_rooms, populate_rooms, populate_room_occupants
+
+import ipdb
+
+
+def populate_rooms_from_db():
+	rooms_from_db = populate_rooms()
+	for room in rooms_from_db:
+		room_details = [{
+			"room_capacity": room.room_capacity,
+			"room_name": room.room_name,
+			"room_type": room.room_type,
+			"people_allocated": []
+		}]
+		if room.room_type == "Living space":
+			created_room = {r["room_name"]: LivingSpace(**r) for r in room_details}
+		elif room.room_type == "Office":
+			created_room = {r["room_name"]: Office(**r) for r in room_details}
+
+		room_occupants = populate_room_occupants(room.room_name)
+		for occupant in room_occupants:
+			created_room[room_details[0]["room_name"]].add_person_to_room(occupant.person_id)
+
+		current_rooms.rooms.update(created_room)
+
+		if len(created_room[room_details[0]["room_name"]].people_allocated) < room.room_capacity:
+			current_rooms.available_livingspaces.append(room.room_name) if room.room_type == "Living space" else current_rooms.available_offices.append(room.room_name)
+		# ipdb.set_trace()
+
+	return " [*] Rooms successfully loaded from database...\n"
 
 
 def create_room(args):
@@ -49,6 +79,7 @@ def create_room(args):
 
 	return(message)
 
+
 def list_rooms():
 	"""
 	List the rooms in Amity. Returns information about all rooms in Amity
@@ -63,6 +94,7 @@ def list_rooms():
 		
 	return message
 
+
 def room_occupants(args):
 	"""
 	Return the occupants of a room
@@ -75,6 +107,7 @@ def room_occupants(args):
 		return message
 	except:
 		return "Error while retrieving room information"
+
 
 def print_allocations(args):
 	"""
@@ -102,3 +135,7 @@ def print_allocations(args):
 		message = "Specify the file to output to after the `-o` argument"
 
 	return message
+
+
+def add_rooms_to_db():
+	return add_rooms(current_rooms.rooms)

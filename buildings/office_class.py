@@ -1,6 +1,6 @@
 from .room_class import Room
 from .room_functions import current_rooms
-
+ 
 class Office(Room):
 	
 	"""
