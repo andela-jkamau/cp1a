@@ -24,6 +24,8 @@ class PersonDetails(Base):
     living_space = Column(String)
 
 db_name = 'test_amity_db.sqlite'
+if os.path.exists(db_name):
+    os.remove(db_name)
 
 engine = create_engine('sqlite:///' + db_name)
 session = sessionmaker()

@@ -20,9 +20,11 @@ def populate_people_from_db():
             "office_allocated": person.office
         }]
         if person.person_type == "Fellow":
-            person_details[0]["livingspace_allocated"] = person.living_space if person.living_space
+            person_details[0]["livingspace_allocated"] = person.living_space
             created_person = {person_details[0][
             "identifier"]: Fellow(**r) for r in person_details}
+        elif person.person_type == "Staff":
+            created_person = {person_details[0]["identifier"]: Staff(**r) for r in person_details}
         people.update(created_person)
     return " [*] People successfully loaded from database...\n"
 

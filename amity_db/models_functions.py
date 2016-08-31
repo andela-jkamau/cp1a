@@ -37,3 +37,11 @@ def add_people(people_dict):
     except:
         return "Error in adding people to db"
 
+
+def add_rooms(rooms_dict):
+    """
+    Takes a dictionary of room details and adds them to the database
+    """
+
+    for room in rooms_dict:
+        pass
