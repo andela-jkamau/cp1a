@@ -40,13 +40,20 @@ def add_people(people_dict):
 
     try:
         for person in people_dict:
-            person_db = PersonDetails(person_id=people_dict[person].identifier, name=people_dict[person].name, office=people_dict[person].office_allocated)
             try:
-                person_db.living_space = people_dict[person].livingspace_allocated
-                person_db.person_type = "Fellow"
-            except AttributeError:
-                person_db.person_type = "Staff"
+                person_db = PersonDetails(person_id=people_dict[person].identifier, name=people_dict[person].name, office=people_dict[person].office_allocated)
+                try:
+                    person_db.living_space = people_dict[person].livingspace_allocated
+                    person_db.person_type = "Fellow"
+                except AttributeError:
+                    person_db.person_type = "Staff"
 
+            except:
+                person_db = s.query(PersonDetails).filter_by(person_id=people_dict[person].identifier).one()
+                person_db.name = people_dict[person].name
+                person_db.office = people_dict[person].office_allocated
+                if person_db.person_type == "Fellow":
+                    person_db.living_space = people_dict[person].livingspace_allocated
             s.add(person_db)
 
         s.commit()
@@ -62,13 +69,30 @@ def add_rooms(rooms_dict):
     """
 
     for room in rooms_dict:
-        room_db = AmityRoom(room_name=rooms_dict[room].room_name, room_capacity=rooms_dict[room].room_capacity, room_type=rooms_dict[room].room_type)
-        s.add(room_db)
-        
-        for person in rooms_dict[room].people_allocated:
-            occupant = RoomOccupants(person_id=person, room_id=room_db.room_name)
-            s.add(occupant)
+        try:
+            room_db = AmityRoom(room_name=rooms_dict[room].room_name, room_capacity=rooms_dict[room].room_capacity, room_type=rooms_dict[room].room_type)
+            s.add(room_db)
 
+            for person in rooms_dict[room].people_allocated:
+                occupant = RoomOccupants(person_id=person, room_id=room_db.room_name)
+                s.add(occupant)
+                
+        except:
+            room_db = s.query(AmityRoom).filter_by(room_name=rooms_dict[room].room_name).one()
+            room_db.room_name = rooms_dict[room].room_name
+            room_db.room_capacity = rooms_dict[room].room_capacity
+            room_db.room_type = rooms_dict[room].room
+            s.add(room_db)
+
+            for person in rooms_dict[room].people_allocated:
+                try:
+                    # Check if occupation is already recorded in the database
+                    occupant = s.query(RoomOccupants).filter_by(person_id=person).filter_by(room_id=room_db.room_name).one()
+                except:
+                    occupant = RoomOccupants(person_id=person, room_id=room_db.room_name)
+
+                s.add(occupant)
+        
         s.commit()
     
     s.close()
