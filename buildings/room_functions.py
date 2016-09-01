@@ -25,16 +25,13 @@ def populate_rooms_from_db():
 			created_room = {r["room_name"]: LivingSpace(**r) for r in room_details}
 		elif room.room_type == "Office":
 			created_room = {r["room_name"]: Office(**r) for r in room_details}
+		current_rooms.available_livingspaces.append(room.room_name) if room.room_type == "Living space" else current_rooms.available_offices.append(room.room_name)
 
 		room_occupants = populate_room_occupants(room.room_name)
 		for occupant in room_occupants:
 			created_room[room_details[0]["room_name"]].add_person_to_room(occupant.person_id)
 
 		current_rooms.rooms.update(created_room)
-
-		if len(created_room[room_details[0]["room_name"]].people_allocated) < room.room_capacity:
-			current_rooms.available_livingspaces.append(room.room_name) if room.room_type == "Living space" else current_rooms.available_offices.append(room.room_name)
-		# ipdb.set_trace()
 
 	return " [*] Rooms successfully loaded from database...\n"
 
