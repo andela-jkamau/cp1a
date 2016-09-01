@@ -5,7 +5,7 @@ from .person_class import Person
 from .fellow_class import Fellow
 from .staff_class import Staff
 import buildings.room_functions as room_functions
-from amity_db.models_functions import populate_people, add_people
+from amity_db.models_functions import populate_people, add_people, remove_person_from_room_db
 import ipdb
 people = {}
 
@@ -115,9 +115,10 @@ def reallocate_person(args):
                 current_person_room = people[person_id].office_allocated
                 people[person_id].office_allocated = new_room
             elif new_room in rooms_at_amity.available_livingspaces:
-                current_person_room = people[person_id].office_allocated
+                current_person_room = people[person_id].livingspace_allocated
                 people[person_id].livingspace_allocated = new_room
             rooms_at_amity.rooms[current_person_room].remove_person_from_room(person_id)
+            remo
             rooms_at_amity.rooms[new_room].add_person_to_room(person_id)
             return "{} has been moved to {}".format(people[person_id].name, new_room)
     else:
@@ -189,6 +190,21 @@ def print_unallocated(args):
         message = "Specify the file to output to after the `-o` argument"
 
     return message
+
+
+def get_person_id(args):
+    """
+    Returns a person's ID when given their name. Useful when reallocating people
+    """
+
+    person_name = "{} {}".format(args["<person_first_name>"], args["<person_other_name>"])
+
+    for person in people:
+        if people[person].name == person_name:
+            return "{} has ID Number {}".format(person_name, people[person].identifier)
+
+    return "The person with the name given doesn't exist in the system" 
+
 
 def add_people_to_db():
     return add_people(people)

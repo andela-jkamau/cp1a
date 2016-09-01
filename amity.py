@@ -5,6 +5,7 @@ Usage:
     amity create_room <room_name>...
     amity add_person <person_first_name> <person_other_name> <person_type> [<wants_accommodation>]
     amity reallocate_person <person_identifier> <new_room_name>
+    amity get_person_id <person_first_name> <person_other_name>
     amity load_people <filename>
     amity print_all_rooms
     amity print_allocations [-o <file_location>]
@@ -107,6 +108,17 @@ class AmityInteractive(cmd.Cmd):
         print(person_functions.reallocate_person(arg))
 
     @docopt_cmd
+    def do_get_person_id(self, arg):
+        """
+        Get a person's ID after supplying their name
+
+        Usage:
+            get_person_id <person_first_name> <person_other_name>
+        """
+
+        print(person_functions.get_person_id(arg))
+
+    @docopt_cmd
     def do_load_people(self, arg):
         """
         Adds people to rooms from a txt file.
@@ -203,7 +215,7 @@ class AmityInteractive(cmd.Cmd):
         """
         Quits out of Interactive Mode.
         """
-        
+
         print(person_functions.add_people_to_db())
         print(room_functions.add_rooms_to_db())
         print('Good Bye!')

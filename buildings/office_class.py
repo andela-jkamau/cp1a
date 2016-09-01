@@ -19,7 +19,4 @@ class Office(Room):
 			current_rooms.available_offices.remove(self.room_name)
 
 	def remove_person_from_room(self, person_id):
-		try:
-			self.people_allocated.remove(person_id)
-		except:
-			return False
+		self.people_allocated.remove(person_id)

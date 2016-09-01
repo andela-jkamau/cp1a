@@ -73,10 +73,19 @@ def add_rooms(rooms_dict):
                 occupant = s.query(RoomOccupants).filter_by(person_id=person).filter_by(room_id=room_db.room_name).one()
             except:
                 occupant = RoomOccupants(person_id=person, room_id=room_db.room_name)
-
-            s.add(occupant)
+                s.add(occupant)
         
         s.commit()
     
     s.close()
     return "Rooms added to database successfully"
+
+
+def remove_person_from_room_db(person_id, room_name):
+    """
+    Removes a person from a room
+    """
+
+    occupant = s.query(RoomOccupants).filter_by(person_id=person).filter_by(room_id=room_db.room_name).all()
+    s.delete(occupant)
+    s.commit()
