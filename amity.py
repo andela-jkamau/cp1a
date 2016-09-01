@@ -203,7 +203,9 @@ class AmityInteractive(cmd.Cmd):
         """
         Quits out of Interactive Mode.
         """
-
+        
+        print(person_functions.add_people_to_db())
+        print(room_functions.add_rooms_to_db())
         print('Good Bye!')
         exit()
 
