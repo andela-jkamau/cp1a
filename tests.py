@@ -1,13 +1,6 @@
 import unittest
 from subprocess import getoutput
 
-from buildings.amity_class import Amity
-from buildings.livingspace_class import LivingSpace
-from buildings.office_class import Office
-from buildings.room_class import Room
-from humans.fellow_class import Fellow
-from humans.person_class import Person
-from humans.staff_class import Staff
 import buildings.room_functions as room_functions
 import humans.person_functions as person_functions
 
@@ -18,7 +11,7 @@ class TestClasses(unittest.TestCase):
             Tests for program's continuous development.
     """
 
-    @classmethod
+    """@classmethod
     def setUpClass(cls):  # Set up required classes
         cls._amity = Amity()
         cls._livingspace = LivingSpace(
@@ -51,7 +44,7 @@ class TestClasses(unittest.TestCase):
             msg="Cannot create `Person` instance")
         self.assertIsInstance(
             self._staff, Staff,
-            msg="Cannot create `Staff` instance")
+            msg="Cannot create `Staff` instance")"""
 
     def test_commands_callability(self):
         # Test help message
