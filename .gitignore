@@ -93,3 +93,4 @@ mytests.py
 test_*.txt
 *.sqlite
 .DS_Store
+test_amity_db.sqlite
