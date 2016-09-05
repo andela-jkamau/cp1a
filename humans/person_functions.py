@@ -118,7 +118,7 @@ def reallocate_person(args):
                 current_person_room = people[person_id].livingspace_allocated
                 people[person_id].livingspace_allocated = new_room
             rooms_at_amity.rooms[current_person_room].remove_person_from_room(person_id)
-            remo
+            remove_person_from_room_db(person_id, current_person_room)
             rooms_at_amity.rooms[new_room].add_person_to_room(person_id)
             return "{} has been moved to {}".format(people[person_id].name, new_room)
     else:

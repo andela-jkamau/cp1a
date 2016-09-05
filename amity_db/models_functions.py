@@ -86,6 +86,8 @@ def remove_person_from_room_db(person_id, room_name):
     Removes a person from a room
     """
 
-    occupant = s.query(RoomOccupants).filter_by(person_id=person).filter_by(room_id=room_db.room_name).all()
+    import ipdb
+    occupant = s.query(RoomOccupants).filter_by(person_id=person_id).filter_by(room_id=room_name).all()
+    ipdb.set_trace()
     s.delete(occupant)
     s.commit()
