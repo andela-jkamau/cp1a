@@ -88,6 +88,6 @@ def remove_person_from_room_db(person_id, room_name):
 
     import ipdb
     occupant = s.query(RoomOccupants).filter_by(person_id=person_id).filter_by(room_id=room_name).all()
-    ipdb.set_trace()
-    s.delete(occupant)
+    for occupants in occupant:
+        s.delete(occupants)
     s.commit()
