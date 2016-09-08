@@ -11,7 +11,7 @@ Usage:
     amity print_allocations [-o <file_location>]
     amity print_unallocated [-o <file_location>]
     amity print_room <room_name>
-    amity save_state [--db=sqlite_database]
+    amity save_state [--db <sqlite_database>]
     amity load_state <sqlite_database>
     amity (-i | --interactive)
     amity (-h | --help)
@@ -19,6 +19,7 @@ Options:
     -i, --interactive  Interactive Mode
     -h, --help  Show this screen and exit
     -o Output into a specified file
+    --db Specify a database path
 """
 
 import sys
@@ -27,7 +28,8 @@ from docopt import docopt, DocoptExit
 
 import buildings.room_functions as room_functions
 import humans.person_functions as person_functions
-from amity_db.models import *
+import amity_db.models_functions as amity_models
+import config
 
 
 def docopt_cmd(func):
@@ -194,8 +196,11 @@ class AmityInteractive(cmd.Cmd):
         the sqlite_database specified
 
         Usage:
-            save_state [--db=sqlite_database]
+            save_state [--db <sqlite_database>]
         """
+
+        if arg["--db"] and arg["<sqlite_database>"] is not None:
+            amity_models.change_db_path(arg["<sqlite_database>"])
 
         print(person_functions.add_people_to_db())
         print(room_functions.add_rooms_to_db())

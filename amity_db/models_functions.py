@@ -1,9 +1,18 @@
 from sqlalchemy import *
-from .models import Base, AmityRoom, PersonDetails, RoomOccupants, session, engine
+from .models import Base, AmityRoom, PersonDetails, RoomOccupants, DbConnection
 
 
-Base.metadata.bind = engine
-s = session()
+my_connection = DbConnection()
+
+
+def change_db_path(new_path):
+    my_connection.engine = create_engine('sqlite:///' + new_path)
+    my_connection.session.configure(bind=my_connection.engine)
+    Base.metadata.create_all(my_connection.engine)
+
+
+Base.metadata.bind = my_connection.engine
+s = my_connection.session()
 
 
 def populate_people():

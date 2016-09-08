@@ -3,6 +3,7 @@ import sys
 from sqlalchemy import *
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship, sessionmaker
+import config
 
 
 Base = declarative_base()
@@ -37,14 +38,14 @@ class RoomOccupants(Base):
     amity_room = relationship(AmityRoom)
 
 
-db_name = 'test_amity_db.sqlite'
+class DbConnection(object):
+    """
+    Creates a db connection object
+    """
 
-"""
-if os.path.exists(db_name):
-    os.remove(db_name)
-"""
-
-engine = create_engine('sqlite:///' + db_name)
-session = sessionmaker()
-session.configure(bind=engine)
-Base.metadata.create_all(engine)
+    def __init__(self):
+        self.db_name = 'test_amity_db.sqlite'
+        self.engine = create_engine('sqlite:///' + self.db_name)
+        self.session = sessionmaker()
+        self.session.configure(bind=self.engine)
+        Base.metadata.create_all(self.engine)
