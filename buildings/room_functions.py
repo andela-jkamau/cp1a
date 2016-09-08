@@ -98,6 +98,9 @@ def list_rooms():
     """
 
     message = ""
+    if len(current_rooms.rooms) == 0:
+        return "No rooms have been created"
+
     try:
         for room in current_rooms.rooms:
             message += ("\nROOM NAME: {}\n"
@@ -130,6 +133,8 @@ def room_occupants(args):
 
     try:
         message = "OCCUPANTS OF {}:".format(args["<room_name>"])
+        if len(current_rooms.rooms[args["<room_name>"]].people_allocated) == 0:
+            return "No occupants in this room"
         for person_id in \
                 current_rooms.rooms[args["<room_name>"]].people_allocated:
             message += "\n{}".format(
