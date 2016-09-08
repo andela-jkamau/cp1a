@@ -6,6 +6,7 @@ my_connection = DbConnection()
 
 
 def change_db_path(new_path):
+    my_connection.db_name = new_path
     my_connection.engine = create_engine('sqlite:///' + new_path)
     my_connection.session.configure(bind=my_connection.engine)
     Base.metadata.create_all(my_connection.engine)
@@ -66,9 +67,11 @@ def add_people(people_dict):
 
         s.commit()
         s.close()
-        return "People added to database successfully"
+        message = "People added to '{}' database successfully".\
+            format(my_connection.db_name)
+        return message
     except:
-        return "Error in adding people to db"
+        return "Error encountered when adding people to db"
 
 
 def add_rooms(rooms_dict):
@@ -99,7 +102,9 @@ def add_rooms(rooms_dict):
         s.commit()
 
     s.close()
-    return "Rooms added to database successfully"
+    message = "Rooms added to '{}' database successfully".\
+        format(my_connection.db_name)
+    return message
 
 
 def remove_person_from_room_db(person_id, room_name):
