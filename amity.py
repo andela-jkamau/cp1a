@@ -214,7 +214,10 @@ class AmityInteractive(cmd.Cmd):
             load_state <sqlite_database>
         """
 
-        print(arg)
+        amity_models.change_db_path(arg["<sqlite_database>"])
+
+        print(person_functions.populate_people_from_db())
+        print(room_functions.populate_rooms_from_db())
 
     def do_quit(self, arg):
         """
@@ -226,8 +229,8 @@ class AmityInteractive(cmd.Cmd):
         print('Good Bye!')
         exit()
 
-print(person_functions.populate_people_from_db())
-print(room_functions.populate_rooms_from_db())
+'''print(person_functions.populate_people_from_db())
+print(room_functions.populate_rooms_from_db())'''
 
 opt = docopt(__doc__, sys.argv[1:])
 

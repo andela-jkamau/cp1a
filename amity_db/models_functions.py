@@ -95,7 +95,6 @@ def remove_person_from_room_db(person_id, room_name):
     Removes a person from a room
     """
 
-    import ipdb
     occupant = s.query(RoomOccupants).filter_by(person_id=person_id).filter_by(room_id=room_name).all()
     for occupants in occupant:
         s.delete(occupants)
