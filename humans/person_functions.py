@@ -1,19 +1,18 @@
 import random
-
-
-from .person_class import Person
+import sys
 from .fellow_class import Fellow
 from .staff_class import Staff
 import buildings.room_functions as room_functions
-from amity_db.models_functions import populate_people, add_people, remove_person_from_room_db
-import ipdb
+from amity_db.models_functions import \
+    populate_people, add_people, remove_person_from_room_db
+
+
 people = {}
 
 
 def populate_people_from_db():
     people_from_db = populate_people()
     for person in people_from_db:
-        #ipdb.set_trace()
         person_details = [{
             "name": person.name,
             "identifier": person.person_id,
@@ -21,10 +20,14 @@ def populate_people_from_db():
         }]
         if person.person_type == "Fellow":
             person_details[0]["livingspace_allocated"] = person.living_space
-            created_person = {person_details[0][
-            "identifier"]: Fellow(**r) for r in person_details}
+            created_person = {
+                person_details[0]["identifier"]: Fellow(**r)
+                for r in person_details
+            }
         elif person.person_type == "Staff":
-            created_person = {person_details[0]["identifier"]: Staff(**r) for r in person_details}
+            created_person = {
+                person_details[0]["identifier"]: Staff(**r)
+                for r in person_details}
         people.update(created_person)
     return " [*] People successfully loaded from database...\n"
 
@@ -36,7 +39,7 @@ def create_person(args):
 
     full_name = args["<person_first_name>"] + " " + args["<person_other_name>"]
     for person in people:
-        if people[person].name == full_name: 
+        if people[person].name == full_name:
             return "{} already exists".format(people[person].name)
 
     identifier = len(people) + 1
@@ -48,8 +51,10 @@ def create_person(args):
 
     person_type = args["<person_type>"].upper()
     if person_type == "FELLOW":
-        if args["<wants_accommodation>"] == "Y" or args["<wants_accommodation>"] == "y":
-            person_details[0]["livingspace_allocated"] = allocate_livingspace(identifier)
+        if args["<wants_accommodation>"] == "Y" or \
+                args["<wants_accommodation>"] == "y":
+            person_details[0]["livingspace_allocated"] = \
+                allocate_livingspace(identifier)
         created_person = {person_details[0][
             "identifier"]: Fellow(**r) for r in person_details}
 
@@ -80,7 +85,9 @@ def create_person(args):
 
 def allocate_office(identifier):
     if len(room_functions.current_rooms.available_offices) > 0:
-        office = str(random.choice(room_functions.current_rooms.available_offices))
+        office = str(
+            random.choice(room_functions.current_rooms.available_offices)
+        )
         allocated_office = room_functions.current_rooms.rooms[office]
         allocated_office.add_person_to_room(identifier)
         return allocated_office.room_name
@@ -90,7 +97,8 @@ def allocate_office(identifier):
 
 def allocate_livingspace(identifier):
     if len(room_functions.current_rooms.available_livingspaces) > 0:
-        living = str(random.choice(room_functions.current_rooms.available_livingspaces))
+        living = str(random.choice(
+            room_functions.current_rooms.available_livingspaces))
         allocated_living = room_functions.current_rooms.rooms[living]
         allocated_living.add_person_to_room(identifier)
         return allocated_living.room_name
@@ -100,27 +108,30 @@ def allocate_livingspace(identifier):
 
 def reallocate_person(args):
     """
-    Reallocate a person from one room to another 
+    Reallocate a person from one room to another
     """
 
     person_id = int(args["<person_identifier>"])
     if person_id in list(people.keys()):
-        person = people[person_id]
         new_room = args["<new_room_name>"]
         rooms_at_amity = room_functions.current_rooms
-        if new_room not in rooms_at_amity.available_livingspaces and new_room not in rooms_at_amity.available_offices:
+        if new_room not in rooms_at_amity.available_livingspaces and \
+                new_room not in rooms_at_amity.available_offices:
             return "The new room either doesn't exist or is full"
         else:
-            if new_room in rooms_at_amity.available_offices: 
+            if new_room in rooms_at_amity.available_offices:
                 current_person_room = people[person_id].office_allocated
                 people[person_id].office_allocated = new_room
             elif new_room in rooms_at_amity.available_livingspaces:
                 current_person_room = people[person_id].livingspace_allocated
                 people[person_id].livingspace_allocated = new_room
-            rooms_at_amity.rooms[current_person_room].remove_person_from_room(person_id)
+            rooms_at_amity.\
+                rooms[current_person_room].\
+                remove_person_from_room(person_id)
             remove_person_from_room_db(person_id, current_person_room)
             rooms_at_amity.rooms[new_room].add_person_to_room(person_id)
-            return "{} has been moved to {}".format(people[person_id].name, new_room)
+            return "{} has been moved to {}".\
+                format(people[person_id].name, new_room)
     else:
         return "There is no person with the given identifier"
 
@@ -147,12 +158,17 @@ def load_people(args):
             file_read = f.readlines()
         for person in file_read:
             person = person.split()
-            my_args = {'<person_first_name>': person[0], '<person_other_name>': person[1], '<person_type>': person[2], '<wants_accommodation>': person[3] if len(person)>3 else None}
+            my_args = {
+                '<person_first_name>': person[0],
+                '<person_other_name>': person[1],
+                '<person_type>': person[2],
+                '<wants_accommodation>': person[3]
+                if len(person) > 3 else None}
             print (create_person(my_args))
         message = "Finished adding people"
     except:
         message = "Error while adding people to system"
-    
+
     return message
 
 
@@ -161,19 +177,24 @@ def print_unallocated(args):
     Returns unallocated people
     """
     message = ""
-    
+
     for person in people:
         if people[person].office_allocated is None:
-            message += "{} hasn't been allocated to an office".format(people[person].name)
+            message += "{} hasn't been allocated to an office".\
+                format(people[person].name)
             try:
-                message += " or a living space".format(people[person].name) if people[person].livingspace_allocated is None else ""
+                message += " or a living space".\
+                    format(people[person].name) if \
+                    people[person].livingspace_allocated is None else ""
             except AttributeError:
                 message += ""
             message += "\n"
 
         else:
             try:
-                message += "{} hasn't been allocated to a living space".format(people[person].name) if people[person].livingspace_allocated is None else ""
+                message += "{} hasn't been allocated to a living space".\
+                    format(people[person].name) if \
+                    people[person].livingspace_allocated is None else ""
                 message += "\n"
             except AttributeError:
                 message += ""
@@ -186,7 +207,13 @@ def print_unallocated(args):
             message = "Unallocations have been printed to {}".format(filename)
         except:
             message = str(sys.exc_info()[0])
-    elif (args['<file_location>'] is not None and args['-o'] is False) or (args['-o'] is not False and args['<file_location>'] is None):
+    elif (
+        args['<file_location>'] is not None and
+        args['-o'] is False
+    ) or (
+        args['-o'] is not False and
+        args['<file_location>'] is None
+    ):
         message = "Specify the file to output to after the `-o` argument"
 
     return message
@@ -194,16 +221,19 @@ def print_unallocated(args):
 
 def get_person_id(args):
     """
-    Returns a person's ID when given their name. Useful when reallocating people
+    Returns a person's ID when given their name.
+    Useful when reallocating people
     """
 
-    person_name = "{} {}".format(args["<person_first_name>"], args["<person_other_name>"])
+    person_name = "{} {}".\
+        format(args["<person_first_name>"], args["<person_other_name>"])
 
     for person in people:
         if people[person].name == person_name:
-            return "{} has ID Number {}".format(person_name, people[person].identifier)
+            return "{} has ID Number {}".\
+                format(person_name, people[person].identifier)
 
-    return "The person with the name given doesn't exist in the system" 
+    return "The person with the name given doesn't exist in the system"
 
 
 def add_people_to_db():

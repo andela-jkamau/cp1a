@@ -49,10 +49,15 @@ def add_people(people_dict):
 
     try:
         for person in people_dict:
-            #try:
-            person_db = PersonDetails(person_id=people_dict[person].identifier, name=people_dict[person].name, office=people_dict[person].office_allocated)
+
+            person_db = PersonDetails(
+                person_id=people_dict[person].identifier,
+                name=people_dict[person].name,
+                office=people_dict[person].office_allocated
+            )
             try:
-                person_db.living_space = people_dict[person].livingspace_allocated
+                person_db.living_space = people_dict[
+                    person].livingspace_allocated
                 person_db.person_type = "Fellow"
             except AttributeError:
                 person_db.person_type = "Staff"
@@ -72,20 +77,27 @@ def add_rooms(rooms_dict):
     """
 
     for room in rooms_dict:
-        #try:
-        room_db = AmityRoom(room_name=rooms_dict[room].room_name, room_capacity=rooms_dict[room].room_capacity, room_type=rooms_dict[room].room_type)
+
+        room_db = AmityRoom(
+            room_name=rooms_dict[room].room_name,
+            room_capacity=rooms_dict[room].room_capacity,
+            room_type=rooms_dict[room].room_type
+        )
         s.merge(room_db)
 
         for person in rooms_dict[room].people_allocated:
             try:
                 # Check if occupation is already recorded in the database
-                occupant = s.query(RoomOccupants).filter_by(person_id=person).filter_by(room_id=room_db.room_name).one()
+                occupant = s.query(RoomOccupants).\
+                    filter_by(person_id=person).\
+                    filter_by(room_id=room_db.room_name).one()
             except:
-                occupant = RoomOccupants(person_id=person, room_id=room_db.room_name)
+                occupant = RoomOccupants(
+                    person_id=person, room_id=room_db.room_name)
                 s.add(occupant)
-        
+
         s.commit()
-    
+
     s.close()
     return "Rooms added to database successfully"
 
@@ -95,7 +107,8 @@ def remove_person_from_room_db(person_id, room_name):
     Removes a person from a room
     """
 
-    occupant = s.query(RoomOccupants).filter_by(person_id=person_id).filter_by(room_id=room_name).all()
+    occupant = s.query(RoomOccupants).filter_by(
+        person_id=person_id).filter_by(room_id=room_name).all()
     for occupants in occupant:
         s.delete(occupants)
     s.commit()

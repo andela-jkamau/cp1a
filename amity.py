@@ -29,7 +29,6 @@ from docopt import docopt, DocoptExit
 import buildings.room_functions as room_functions
 import humans.person_functions as person_functions
 import amity_db.models_functions as amity_models
-import config
 
 
 def docopt_cmd(func):
@@ -229,8 +228,6 @@ class AmityInteractive(cmd.Cmd):
         print('Good Bye!')
         exit()
 
-'''print(person_functions.populate_people_from_db())
-print(room_functions.populate_rooms_from_db())'''
 
 opt = docopt(__doc__, sys.argv[1:])
 

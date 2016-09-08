@@ -1,9 +1,6 @@
-import os
-import sys
 from sqlalchemy import *
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship, sessionmaker
-import config
 
 
 Base = declarative_base()
@@ -11,7 +8,7 @@ Base = declarative_base()
 
 class AmityRoom(Base):
     __tablename__ = 'amity_room'
-    
+
     room_name = Column(String, unique=True, primary_key=True)
     room_capacity = Column(Integer)
     room_type = Column(String)
@@ -19,7 +16,7 @@ class AmityRoom(Base):
 
 class PersonDetails(Base):
     __tablename__ = 'person_details'
-    
+
     person_id = Column(Integer, primary_key=True)
     name = Column(String)
     person_type = Column(String)
@@ -29,7 +26,7 @@ class PersonDetails(Base):
 
 class RoomOccupants(Base):
     __tablename__ = 'room_occupants'
-    
+
     id = Column(Integer, primary_key=True)
     person_id = Column(Integer, ForeignKey('person_details.person_id'))
     room_id = Column(String, ForeignKey('amity_room.room_name'))
