@@ -100,22 +100,23 @@ def list_rooms():
     message = ""
     try:
         for room in current_rooms.rooms:
-            message += "\nROOM NAME: {}\n" + \
-                "ROOM TYPE: {}\n" + \
-                "ROOM CAPACITY: {}\n" + \
-                "NUMBER OF OCCUPANTS: {}\n" + \
-                "NUMBER OF EMPTY SLOTS: {}\n".\
-                format(
-                    current_rooms.rooms[room].room_name,
-                    current_rooms.rooms[room].room_type,
-                    current_rooms.rooms[room].room_capacity,
-                    len(current_rooms.rooms[room].people_allocated),
-                    int(
-                        current_rooms.rooms[room].room_capacity
-                    ) - int(
-                        len(current_rooms.rooms[room].people_allocated)
-                    )
-                )
+            message += ("\nROOM NAME: {}\n"
+                        "ROOM TYPE: {}\n"
+                        "ROOM CAPACITY: {}\n"
+                        "NUMBER OF OCCUPANTS: {}\n"
+                        "NUMBER OF EMPTY SLOTS: {}\n"
+                        .format(
+                            current_rooms.rooms[room].room_name,
+                            current_rooms.rooms[room].room_type,
+                            current_rooms.rooms[room].room_capacity,
+                            len(current_rooms.rooms[room].people_allocated),
+                            int(
+                                current_rooms.rooms[room].room_capacity
+                            ) - int(
+                                len(current_rooms.rooms[room].people_allocated)
+                            )
+                        )
+                        )
     except:
         message = "Error while retrieving room information"
 
