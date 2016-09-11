@@ -190,18 +190,34 @@ class TestClasses(unittest.TestCase):
             Test loading of people from a text file
         """
 
+        test_filename = "test_people.txt"
+        people_to_load = "OLUWAFEMI SULE FELLOW Y\n"\
+            "DOMINIC WALTERS STAFF\n"\
+            "SIMON PATTERSON FELLOW Y\n"\
+            "MARI LAWRENCE FELLOW Y\n"\
+            "LEIGH RILEY STAFF\n"\
+            "TANA LOPEZ FELLOW Y\n"\
+            "KELLY McGUIRE STAFF N"
+
+        if os.path.exists(test_filename):
+            os.remove(test_filename)
+        with open(test_filename, 'wt') as test_file:
+            test_file.write(people_to_load)
+
         text_file_args = {
-            "<filename>": "test_people.txt"
+            "<filename>": test_filename
         }
+
         buf = StringIO()
         with redirect_stdout(buf):
             person_functions.load_people(text_file_args)
-
         self.assertGreater(
             len(person_functions.people),
             7,
             msg="People not being loaded from supplied text file"
         )
+
+        os.remove(test_filename)
 
     def test_8_reallocate_person(self):
         """
