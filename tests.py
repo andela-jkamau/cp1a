@@ -78,7 +78,8 @@ class TestClasses(unittest.TestCase):
         self.assertIn(
             "Bash",
             room_functions.current_rooms.available_livingspaces,
-            msg="Empty living space not being added to list of available living spaces"
+            msg="Empty living space not being added"
+            " to list of available living spaces"
         )
 
     def test_4_person_creation_with_rooms(self):
@@ -125,7 +126,8 @@ class TestClasses(unittest.TestCase):
         )
         self.assertFalse(
             person_functions.people[3].livingspace_allocated,
-            msg="Person being allocated to a living space when they don't want accommodation"
+            msg="Person being allocated to a living space"
+            " when they don't want accommodation"
         )
 
         # Test creation of staff
@@ -239,12 +241,14 @@ class TestClasses(unittest.TestCase):
         self.assertIn(
             3,
             room_functions.current_rooms.rooms["Krypton"].people_allocated,
-            msg="Person not being added to room's allocation list after reallocation"
+            msg="Person not being added to room's"
+            " allocation list after reallocation"
         )
         self.assertNotIn(
             3,
             room_functions.current_rooms.rooms["Valhalla"].people_allocated,
-            msg="Person not being removed from previous room after reallocation"
+            msg="Person not being removed from previous"
+            " room after reallocation"
         )
 
         # Test reallocation of person's living space
@@ -255,7 +259,8 @@ class TestClasses(unittest.TestCase):
         self.assertEqual(
             person_functions.people[2].office_allocated,
             "Valhalla",
-            msg="Person being reallocated to a new office instead of living space"
+            msg="Person being reallocated to a new office"
+            " instead of living space"
         )
         self.assertEqual(
             person_functions.people[2].livingspace_allocated,
@@ -265,12 +270,14 @@ class TestClasses(unittest.TestCase):
         self.assertIn(
             2,
             room_functions.current_rooms.rooms["Ruby"].people_allocated,
-            msg="Person not being added to room's allocation list after reallocation"
+            msg="Person not being added to room's"
+            " allocation list after reallocation"
         )
         self.assertNotIn(
             2,
             room_functions.current_rooms.rooms["Bash"].people_allocated,
-            msg="Person not being removed from previous room after reallocation"
+            msg="Person not being removed from previous"
+            " room after reallocation"
         )
 
     def test_9_print_allocations(self):
@@ -284,15 +291,13 @@ class TestClasses(unittest.TestCase):
         }
 
         # Test printing of allocations to screen
-        """buf = StringIO()
-        with redirect_stdout(buf):
-            room_functions.print_allocations(allocations_args)
+        allocations = room_functions.print_allocations(allocations_args)
         self.assertTrue(
             any(
                 "TANA LOPEZ," in text
-                for text in [buf.getvalue()]
+                for text in [allocations]
             )
-        )"""
+        )
 
         # Test printing of allocations to file
         output_file = "test_print_unallocations.txt"
