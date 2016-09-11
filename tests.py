@@ -193,7 +193,9 @@ class TestClasses(unittest.TestCase):
         text_file_args = {
             "<filename>": "test_people.txt"
         }
-        person_functions.load_people(text_file_args)
+        buf = StringIO()
+        with redirect_stdout(buf):
+            person_functions.load_people(text_file_args)
 
         self.assertGreater(
             len(person_functions.people),
@@ -265,18 +267,19 @@ class TestClasses(unittest.TestCase):
             "<file_location>": None
         }
 
-        '''# Test printing of allocations to screen
-        buf = StringIO()
+        # Test printing of allocations to screen
+        """buf = StringIO()
         with redirect_stdout(buf):
             room_functions.print_allocations(allocations_args)
-            self.assertIn(
-                "MARI LAWRENCE",
-                buf.getvalue(),
-                msg="Printed allocations are not correct"
-            )'''
+        self.assertTrue(
+            any(
+                "TANA LOPEZ," in text
+                for text in [buf.getvalue()]
+            )
+        )"""
 
         # Test printing of allocations to file
-        '''output_file = "test_print_unallocations.txt"
+        output_file = "test_print_unallocations.txt"
         if os.path.exists(output_file):
             os.remove(output_file)
         allocations_args["-o"] = True
@@ -284,11 +287,13 @@ class TestClasses(unittest.TestCase):
         room_functions.print_allocations(allocations_args)
 
         with open(output_file, 'r') as read_output:
-            self.assertIn(
-                "SIMON PATTERSON",
-                [*read_output.readlines()]
+            self.assertTrue(
+                any(
+                    "SIMON PATTERSON," in text
+                    for text in read_output.readlines()
+                )
             )
-        os.remove(output_file)'''
+        os.remove(output_file)
 
 
 if __name__ == '__main__':
