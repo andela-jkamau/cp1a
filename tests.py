@@ -300,9 +300,10 @@ class TestClasses(unittest.TestCase):
         )
 
         # Test printing of allocations to file
-        output_file = "test_print_unallocations.txt"
+        output_file = "test_print_allocations.txt"
         if os.path.exists(output_file):
             os.remove(output_file)
+
         allocations_args["-o"] = True
         allocations_args["<file_location>"] = output_file
         room_functions.print_allocations(allocations_args)
@@ -314,6 +315,45 @@ class TestClasses(unittest.TestCase):
                     for text in read_output.readlines()
                 )
             )
+
+        os.remove(output_file)
+
+    def test_10_print_unallocated(self):
+        """
+            Test printing of unallocated
+        """
+
+        unallocated_args = {
+            "-o": False,
+            "<file_location>": None
+        }
+
+        # Test printing of unallocated to screen
+        unallocated = person_functions.print_unallocated(unallocated_args)
+        self.assertTrue(
+            any(
+                "Jimmy Kamau" in text
+                for text in [unallocated]
+            )
+        )
+
+        # Test printing of unallocated to file
+        output_file = "test_print_unallocated.txt"
+        if os.path.exists(output_file):
+            os.remove(output_file)
+
+        unallocated_args["-o"] = True
+        unallocated_args["<file_location>"] = output_file
+        person_functions.print_allocations(unallocated_args)
+
+        with open(output_file, 'r') as read_output:
+            self.assertTrue(
+                any(
+                    "Jimmy Kamau" in text
+                    for text in read_output.readlines()
+                )
+            )
+
         os.remove(output_file)
 
 
