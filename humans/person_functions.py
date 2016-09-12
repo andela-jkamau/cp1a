@@ -183,9 +183,8 @@ def print_unallocated(args):
             message += "{} hasn't been allocated to an office".\
                 format(people[person].name)
             try:
-                persons_name = people[person].name
                 message += " or a living space".\
-                    format(persons_name) if \
+                    format(people[person].name) if \
                     people[person].livingspace_allocated is None else ""
             except AttributeError:
                 message += ""
