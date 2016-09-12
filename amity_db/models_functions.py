@@ -70,7 +70,7 @@ def add_people(people_dict):
         message = "People added to '{}' database successfully".\
             format(my_connection.db_name)
         return message
-    except:
+    except Exception:
         return "Error encountered when adding people to db"
 
 
