@@ -318,7 +318,7 @@ class TestClasses(unittest.TestCase):
 
         os.remove(output_file)
 
-    def test_10_print_unallocated(self):
+    def test_7_print_unallocated(self):
         """
             Test printing of unallocated
         """
@@ -344,7 +344,7 @@ class TestClasses(unittest.TestCase):
 
         unallocated_args["-o"] = True
         unallocated_args["<file_location>"] = output_file
-        person_functions.print_allocations(unallocated_args)
+        person_functions.print_unallocated(unallocated_args)
 
         with open(output_file, 'r') as read_output:
             self.assertTrue(
