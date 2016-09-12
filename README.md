@@ -5,3 +5,28 @@ Amity has rooms which can be offices or living spaces. An office can occupy a ma
 A person to be allocated could be a fellow or staff. Staff cannot be allocated living spaces. Fellows have a choice to choose a living space or not.
 
 This system will be used to automatically allocate spaces to people at random.
+
+# Installation
+
+Clone this repo:
+```
+git clone https://github.com/andela-jkamau/cp1a.git
+```
+
+
+Navigate to the `cp1a` directory:
+```
+cd cp1a
+```
+
+
+Install dependancies:
+```
+pip install -r requirements.txt
+```
+
+
+Run tests to ensure everything is working as expected:
+```
+python tests.py
+```
