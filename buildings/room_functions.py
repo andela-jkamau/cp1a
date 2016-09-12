@@ -24,11 +24,10 @@ def populate_rooms_from_db():
         if room.room_type == "Living space":
             created_room = {r["room_name"]: LivingSpace(
                 **r) for r in room_details}
+            current_rooms.available_livingspaces.append(room.room_name)
         elif room.room_type == "Office":
             created_room = {r["room_name"]: Office(**r) for r in room_details}
-        current_rooms.available_livingspaces.append(room.room_name) \
-            if room.room_type == "Living space" \
-            else current_rooms.available_offices.append(room.room_name)
+            current_rooms.available_offices.append(room.room_name)
 
         room_occupants = populate_room_occupants(room.room_name)
         for occupant in room_occupants:
