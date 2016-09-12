@@ -30,3 +30,9 @@ Run tests to ensure everything is working as expected:
 ```
 python tests.py
 ```
+
+
+# To do
+
+* Fix `print_allocations` and `print_unallocated` tests failing if called after index 7
+* Find a better way to order tests
