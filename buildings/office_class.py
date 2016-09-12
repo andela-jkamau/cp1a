@@ -12,9 +12,9 @@ class Office(Room):
                 of the people allocated to a room.
     """
 
-    def __init__(self, people_allocated=[], **kwargs):
+    def __init__(self, people_allocated=None, **kwargs):
         super().__init__(**kwargs)
-        self.people_allocated = people_allocated
+        self.people_allocated = people_allocated or []
 
     def add_person_to_room(self, person_id):
         if len(self.people_allocated) < self.room_capacity:
