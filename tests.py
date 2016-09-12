@@ -5,6 +5,7 @@ from io import StringIO
 from contextlib import redirect_stdout
 import buildings.room_functions as room_functions
 import humans.person_functions as person_functions
+import amity_db.models_functions as amity_models
 
 
 class TestClasses(unittest.TestCase):
@@ -280,7 +281,7 @@ class TestClasses(unittest.TestCase):
             " room after reallocation"
         )
 
-    def test_9_print_allocations(self):
+    def test_7_print_allocations(self):
         """
             Test printing of allocations
         """
@@ -355,6 +356,69 @@ class TestClasses(unittest.TestCase):
             )
 
         os.remove(output_file)
+
+    def test_9_save_state(self):
+        """
+            Test saving data to database
+        """
+
+        # Test saving with default database
+        person_functions.add_people_to_db()
+        room_functions.add_rooms_to_db()
+        people_in_db = amity_models.populate_people()
+        rooms_in_db = amity_models.populate_rooms()
+
+        self.assertTrue(
+            os.path.exists("test_amity_db.sqlite"),
+            msg="Default database not being created"
+        )
+        self.assertTrue(
+            any(
+                "MARI LAWRENCE" in person_names
+                for person_names in
+                [person.name for person in people_in_db]
+            ),
+            msg="People not being added to default database"
+        )
+        self.assertTrue(
+            any(
+                "Mordor" in room_names
+                for room_names in
+                [room.room_name for room in rooms_in_db]
+            ),
+            msg="Rooms not being added to default database"
+        )
+
+        # Test saving with user-defined database
+        amity_models.change_db_path("test_my_db.sqlite")
+        person_functions.add_people_to_db()
+        room_functions.add_rooms_to_db()
+        people_in_db = amity_models.populate_people()
+        rooms_in_db = amity_models.populate_rooms()
+
+        self.assertTrue(
+            os.path.exists("test_my_db.sqlite"),
+            msg="User-defined database not being created"
+        )
+        self.assertTrue(
+            any(
+                "MARI LAWRENCE" in person_names
+                for person_names in
+                [person.name for person in people_in_db]
+            ),
+            msg="People not being added to user-defined database"
+        )
+        self.assertTrue(
+            any(
+                "Mordor" in room_names
+                for room_names in
+                [room.room_name for room in rooms_in_db]
+            ),
+            msg="Rooms not being added to user-defined database"
+        )
+
+        os.remove("test_amity_db.sqlite")
+        os.remove("test_my_db.sqlite")
 
 
 if __name__ == '__main__':
