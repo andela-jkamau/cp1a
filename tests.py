@@ -16,7 +16,7 @@ class TestClasses(unittest.TestCase):
             in a sequential manner
     """
 
-    def test_1_person_creation_with_no_rooms(self):
+    def test_01_person_creation_with_no_rooms(self):
 
         # Test creation of person with empty office
         person_args = {
@@ -43,7 +43,7 @@ class TestClasses(unittest.TestCase):
         )
 
     @mock.patch('builtins.input', side_effect=["O"])
-    def test_2_office_creation(self, input):
+    def test_02_office_creation(self, input):
 
         # Test creation of office
         office_args = {
@@ -63,7 +63,7 @@ class TestClasses(unittest.TestCase):
         )
 
     @mock.patch('builtins.input', side_effect=["L"])
-    def test_3_living_space_creation(self, input):
+    def test_03_living_space_creation(self, input):
 
         # Test creation of living space
         living_space_args = {
@@ -83,7 +83,7 @@ class TestClasses(unittest.TestCase):
             " to list of available living spaces"
         )
 
-    def test_4_person_creation_with_rooms(self):
+    def test_04_person_creation_with_rooms(self):
 
         # Test creation of fellow with office and living space
         person_args = {
@@ -149,7 +149,7 @@ class TestClasses(unittest.TestCase):
         )
 
     @mock.patch('builtins.input', side_effect=["O"])
-    def test_5_multiple_office_creation(self, input):
+    def test_05_multiple_office_creation(self, input):
 
         # Test creation of office
         office_args = {
@@ -169,7 +169,7 @@ class TestClasses(unittest.TestCase):
         )
 
     @mock.patch('builtins.input', side_effect=["L"])
-    def test_6_multiple_living_space_creation(self, input):
+    def test_06_multiple_living_space_creation(self, input):
 
         # Test creation of office
         office_args = {
@@ -188,7 +188,7 @@ class TestClasses(unittest.TestCase):
             msg="Empty rooms not being added to list of available rooms"
         )
 
-    def test_7_load_people(self):
+    def test_07_load_people(self):
         """
             Test loading of people from a text file
         """
@@ -222,7 +222,7 @@ class TestClasses(unittest.TestCase):
 
         os.remove(test_filename)
 
-    def test_8_reallocate_person(self):
+    def test_08_reallocate_person(self):
         """
             Test people reallocation
         """
@@ -281,7 +281,7 @@ class TestClasses(unittest.TestCase):
             " room after reallocation"
         )
 
-    def test_7_print_allocations(self):
+    def test_07_print_allocations(self):
         """
             Test printing of allocations
         """
@@ -319,7 +319,7 @@ class TestClasses(unittest.TestCase):
 
         os.remove(output_file)
 
-    def test_7_print_unallocated(self):
+    def test_07_print_unallocated(self):
         """
             Test printing of unallocated
         """
@@ -357,7 +357,7 @@ class TestClasses(unittest.TestCase):
 
         os.remove(output_file)
 
-    def test_9_save_state(self):
+    def test_09_save_state(self):
         """
             Test saving data to database
         """
@@ -417,9 +417,34 @@ class TestClasses(unittest.TestCase):
             msg="Rooms not being added to user-defined database"
         )
 
+    def test_10_load_state(self):
+        """
+            Test loading data from database
+        """
+
+        # Test loading data from user-defined database
+        people_in_db = amity_models.populate_people()
+        rooms_in_db = amity_models.populate_rooms()
+
+        self.assertTrue(
+            any(
+                "LEIGH RILEY" in person_names
+                for person_names in
+                [person.name for person in people_in_db]
+            ),
+            msg="People not being added to user-defined database"
+        )
+        self.assertTrue(
+            any(
+                "Ruby" in room_names
+                for room_names in
+                [room.room_name for room in rooms_in_db]
+            ),
+            msg="Rooms not being added to user-defined database"
+        )
+
         os.remove("test_amity_db.sqlite")
         os.remove("test_my_db.sqlite")
-
 
 if __name__ == '__main__':
     unittest.main()
