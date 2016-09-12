@@ -86,7 +86,7 @@ def create_room(args):
             message += " " + str(room)
         message += " have been created successfully"
 
-    except:
+    except Exception:
         message = "Error encountered while creating rooms"
 
     return(message)

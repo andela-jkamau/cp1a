@@ -94,7 +94,7 @@ def add_rooms(rooms_dict):
                 occupant = s.query(RoomOccupants).\
                     filter_by(person_id=person).\
                     filter_by(room_id=room_db.room_name).one()
-            except:
+            except Exception:
                 occupant = RoomOccupants(
                     person_id=person, room_id=room_db.room_name)
                 s.add(occupant)
