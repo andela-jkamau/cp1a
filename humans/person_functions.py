@@ -166,7 +166,7 @@ def load_people(args):
                 if len(person) > 3 else None}
             print (create_person(my_args))
         message = "Finished adding people"
-    except Exception:
+    except:
         message = "Error while adding people to system"
 
     return message
@@ -183,10 +183,10 @@ def print_unallocated(args):
             message += "{} hasn't been allocated to an office".\
                 format(people[person].name)
             try:
-                if people[person].livingspace_allocated is None:
-                    message += " or a living space".format(people[person].name)
-                else:
-                    message += ""
+                persons_name = people[person].name
+                message += " or a living space".\
+                    format(persons_name) if \
+                    people[person].livingspace_allocated is None else ""
             except AttributeError:
                 message += ""
             message += "\n"
@@ -205,7 +205,7 @@ def print_unallocated(args):
             with open(filename, 'wt') as f:
                 f.write(message)
             message = "Unallocations have been printed to {}".format(filename)
-        except Exception:
+        except:
             message = str(sys.exc_info()[0])
     elif (
         args['<file_location>'] is not None and
