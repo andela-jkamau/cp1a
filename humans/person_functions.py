@@ -192,10 +192,9 @@ def print_unallocated(args):
 
         else:
             try:
-                message += "{} hasn't been allocated to a living space".\
+                message += "{} hasn't been allocated to a living space\n".\
                     format(people[person].name) if \
                     people[person].livingspace_allocated is None else ""
-                message += "\n"
             except AttributeError:
                 message += ""
 
