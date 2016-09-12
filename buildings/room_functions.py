@@ -120,7 +120,7 @@ def list_rooms():
                             )
                         )
                         )
-    except:
+    except Exception:
         message = "Error while retrieving room information"
 
     return message
