@@ -140,7 +140,7 @@ def room_occupants(args):
             message += "\n{}".format(
                 humans_functions.person_functions.people[person_id].name)
         return message
-    except:
+    except Exception:
         return "Error while retrieving room information"
 
 
@@ -165,7 +165,7 @@ def print_allocations(args):
             with open(filename, 'wt') as f:
                 f.write(message)
             message = "Allocations have been printed to {}".format(filename)
-        except:
+        except Exception:
             message = str(sys.exc_info()[0])
     elif (
         args['<file_location>'] is not None and

@@ -166,7 +166,7 @@ def load_people(args):
                 if len(person) > 3 else None}
             print (create_person(my_args))
         message = "Finished adding people"
-    except:
+    except Exception:
         message = "Error while adding people to system"
 
     return message
@@ -205,7 +205,7 @@ def print_unallocated(args):
             with open(filename, 'wt') as f:
                 f.write(message)
             message = "Unallocations have been printed to {}".format(filename)
-        except:
+        except Exception:
             message = str(sys.exc_info()[0])
     elif (
         args['<file_location>'] is not None and
