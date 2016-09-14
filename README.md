@@ -172,8 +172,15 @@ Specifying the optional `-o` option here outputs the registered allocations to t
 ~~~
 Prints a list of unallocated people to the screen.
 ~~~
+(Amity) print_unallocated
+Witha Knife hasn't been allocated to an office or a living space
+Wither Spoon hasn't been allocated to an office
 ~~~
 Specifying the optional `-o` option here outputs the information to the txt file specified by `<file_location>`.
+
+### Database operations
+#### Saving to database
+
 
 
 # To do
