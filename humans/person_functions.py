@@ -55,12 +55,16 @@ def create_person(args):
                 args["<wants_accommodation>"] == "y":
             person_details[0]["livingspace_allocated"] = \
                 allocate_livingspace(identifier)
-        created_person = {person_details[0][
-            "identifier"]: Fellow(**r) for r in person_details}
+        created_person = {
+            person_details[0]["identifier"]:
+            Fellow(**r) for r in person_details
+        }
 
     elif person_type == "STAFF":
-        created_person = {person_details[0][
-            "identifier"]: Staff(**r) for r in person_details}
+        created_person = {
+            person_details[0]["identifier"]:
+            Staff(**r) for r in person_details
+        }
 
     else:
         return "Allowed person type is either Fellow or Staff"
