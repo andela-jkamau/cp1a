@@ -5,6 +5,7 @@ class Person(object):
     name=Person's name
     """
 
-    def __init__(self, name, identifier=0):
+    def __init__(self, name, identifier=0, office_allocated=False):
         self.name = name
-        self.identifier = identifier  # The person's identifier
+        self.identifier = identifier
+        self.office_allocated = office_allocated
