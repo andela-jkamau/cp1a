@@ -19,6 +19,7 @@ Navigate to the `cp1a` directory:
 $ cd cp1a
 ```
 
+Create a virtual environment and activate it using [this guide](http://docs.python-guide.org/en/latest/dev/virtualenvs/)
 
 Install dependancies:
 ```
