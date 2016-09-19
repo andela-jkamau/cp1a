@@ -5,7 +5,7 @@ python:
 install:
   pip install -r requirements.txt
 script:
-  coverage run --omit=*.tox/*,*db_migrations/*,*env/* tests.py
+  coverage run --omit=*.tox/*,*db_migrations/*,*env/* -m unittest
 after_success:
   coveralls
 notifications:
