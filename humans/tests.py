@@ -252,10 +252,6 @@ class TestClasses(unittest.TestCase):
 
     @classmethod
     def tearDownClass(self):
-        room_functions.current_rooms.rooms = {}
-        room_functions.current_rooms.available_offices = []
-        room_functions.current_rooms.available_livingspaces = []
-        person_functions.people = {}
         os.remove("test_amity_db.sqlite")
         os.remove("test_my_db.sqlite")
 

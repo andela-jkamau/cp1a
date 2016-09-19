@@ -10,11 +10,6 @@ class TestClasses(unittest.TestCase):
         Tests for buildings functionality
     """
 
-    def tearDown(self):
-        room_functions.current_rooms.rooms = {}
-        room_functions.current_rooms.available_livingspaces = []
-        room_functions.current_rooms.available_offices = []
-
     @mock.patch('builtins.input', side_effect=["O"])
     def test_office_creation(self, input):
 
@@ -200,6 +195,11 @@ class TestClasses(unittest.TestCase):
 
         os.remove(output_file)
         person_functions.people = {}
+
+    def tearDown(self):
+        room_functions.current_rooms.rooms = {}
+        room_functions.current_rooms.available_livingspaces = []
+        room_functions.current_rooms.available_offices = []
 
 
 if __name__ == '__main__':
