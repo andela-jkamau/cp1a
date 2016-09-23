@@ -1,3 +1,6 @@
+from .room_functions import current_rooms
+
+
 class Room(object):
 
     """
@@ -18,6 +21,14 @@ class Room(object):
         self.room_name = room_name
         self.room_type = room_type
         self.people_allocated = people_allocated or []
+
+    def add_person_to_room(self, person_id):
+        if len(self.people_allocated) < self.room_capacity:
+            self.people_allocated.append(person_id)
+        if len(self.people_allocated) == self.room_capacity:
+            current_rooms.available_offices.remove(self.room_name) \
+                if self.room_type == "Office" else \
+                current_rooms.available_offices.remove(self.room_name)
 
     def remove_person_from_room(self, person_id):
         self.people_allocated.remove(person_id)
