@@ -11,9 +11,8 @@ class TestClasses(unittest.TestCase):
         Tests for database functionality
     """
 
-    @classmethod
     @mock.patch('builtins.input', side_effect=["L", "O"])
-    def setUpClass(self, input):
+    def setUp(self, input):
         livingspace_args = {
             "<room_name>": ["Shell", "Go", "Ruby"]
         }

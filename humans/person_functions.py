@@ -1,5 +1,5 @@
-import random
 import sys
+import random
 from .fellow_class import Fellow
 from .staff_class import Staff
 import buildings.room_functions as room_functions
@@ -168,7 +168,7 @@ def load_people(args):
                 '<person_type>': person[2],
                 '<wants_accommodation>': person[3]
                 if len(person) > 3 else None}
-            print (create_person(my_args))
+            print(create_person(my_args))
         message = "Finished adding people"
     except Exception:
         message = "Error while adding people to system"
